@@ -1,44 +1,26 @@
 import { db } from "./db";
-import {
-  artists, releases, submissions,
-  type Artist, type InsertArtist,
-  type Release, type InsertRelease,
-  type Submission, type InsertSubmission
-} from "@shared/schema";
+import { artists, releases, submissions } from "../shared/schema";
 
-export interface IStorage {
-  getArtists(): Promise<Artist[]>;
-  createArtist(artist: InsertArtist): Promise<Artist>;
-  
-  getReleases(): Promise<Release[]>;
-  createRelease(release: InsertRelease): Promise<Release>;
-  
-  createSubmission(submission: InsertSubmission): Promise<Submission>;
-}
-
-export class DatabaseStorage implements IStorage {
-  async getArtists(): Promise<Artist[]> {
-    return await db.select().from(artists);
+class Storage {
+  getArtists() {
+    return db.select().from(artists);
   }
 
-  async createArtist(artist: InsertArtist): Promise<Artist> {
-    const [newArtist] = await db.insert(artists).values(artist).returning();
-    return newArtist;
+  createArtist(data: any) {
+    return db.insert(artists).values(data).returning();
   }
 
-  async getReleases(): Promise<Release[]> {
-    return await db.select().from(releases);
+  getReleases() {
+    return db.select().from(releases);
   }
 
-  async createRelease(release: InsertRelease): Promise<Release> {
-    const [newRelease] = await db.insert(releases).values(release).returning();
-    return newRelease;
+  createRelease(data: any) {
+    return db.insert(releases).values(data).returning();
   }
 
-  async createSubmission(submission: InsertSubmission): Promise<Submission> {
-    const [newSubmission] = await db.insert(submissions).values(submission).returning();
-    return newSubmission;
+  createSubmission(data: any) {
+    return db.insert(submissions).values(data).returning();
   }
 }
 
-export const storage = new DatabaseStorage();
+export const storage = new Storage();

@@ -1,0 +1,23 @@
+{
+  "include": ["src/**/*", "shared/**/*"],
+  "exclude": ["node_modules", "dist", "build"],
+  "compilerOptions": {
+    "noEmit": true,
+    "strict": true,
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "jsx": "react-jsx",
+    "lib": ["esnext", "dom", "dom.iterable"],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "@shared/*": ["shared/*"]
+    },
+    "types": ["vite/client"],
+    "skipLibCheck": true,
+    "isolatedModules": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true
+  }
+}
