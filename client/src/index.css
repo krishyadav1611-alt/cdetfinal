@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;700&family=Rajdhani:wght@300;400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* HSL Colors - Space separated */
+  /* Background: Deep Matte Black/Midnight */
+  --background: 240 10% 4%;
+  /* Foreground: Off-white/Silver */
+  --foreground: 210 20% 90%;
+  
+  /* Primary: Neon Red / Crimson */
+  --primary: 345 100% 45%;
+  --primary-foreground: 0 0% 100%;
+  
+  /* Secondary: Dark Purple/Midnight */
+  --secondary: 260 50% 15%;
+  --secondary-foreground: 210 20% 90%;
+  
+  /* Muted: Charcoal */
+  --muted: 240 5% 15%;
+  --muted-foreground: 240 5% 60%;
+  
+  /* Accent: Electric/Glitch */
+  --accent: 345 100% 50%;
+  --accent-foreground: 0 0% 100%;
+  
+  /* Borders: Dark Grey */
+  --border: 240 5% 20%;
+  --input: 240 5% 20%;
+  --ring: 345 100% 45%;
+
+  /* Fonts */
+  --font-display: 'Oswald', sans-serif;
+  --font-body: 'Rajdhani', sans-serif;
+  --font-mono: 'Space Mono', monospace;
+}
+
+@layer base {
+  body {
+    @apply bg-background text-foreground antialiased selection:bg-primary selection:text-white;
+    font-family: var(--font-body);
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    @apply uppercase tracking-wider;
+  }
+}
+
+@layer utilities {
+  .text-glow {
+    text-shadow: 0 0 10px rgba(220, 20, 60, 0.5), 0 0 20px rgba(220, 20, 60, 0.3);
+  }
+  
+  .border-glow {
+    box-shadow: 0 0 10px rgba(220, 20, 60, 0.2);
+  }
+
+  .glitch-hover:hover {
+    animation: glitch 0.3s cubic-bezier(.25, .46, .45, .94) both infinite;
+  }
+}
+
+/* VHS Grain Overlay */
+.vhs-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+  opacity: 0.15;
+}
+
+@keyframes glitch {
+  0% { transform: translate(0) }
+  20% { transform: translate(-2px, 2px) }
+  40% { transform: translate(-2px, -2px) }
+  60% { transform: translate(2px, 2px) }
+  80% { transform: translate(2px, -2px) }
+  100% { transform: translate(0) }
+}
